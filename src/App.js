@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useTimer from "./hooks/useTimer";
+import { formatTime } from "./utils";
 
 function App() {
   const rewards = [
@@ -25,7 +26,6 @@ function App() {
    */
   const generateReward = () => {
     // determine if any reward will be received at all
-    console.log("generating reward");
     const roll = Math.floor(Math.random() * 100);
     console.log(`Roll: ${roll}`);
 
@@ -49,15 +49,8 @@ function App() {
     generateReward
   );
 
-  const formatTime = (timeLeft) => {
-    console.log('timeleft', timeLeft);
-    let date = new Date(null);
-    date.setSeconds(timeLeft);
-    return  date.toISOString().substr(11, 8);
-  }
-
   return (
-    <div className="App bg-slate-800 text-center min-h-screen flex flex-col space-y-10 text-gray-200">
+    <div className="App bg-[#16171b] text-center min-h-screen flex flex-col space-y-10 text-[#ce9748]">
       <header className=" flex flex-col items-center">
         <h1 className="text-3xl font-bold underline">
           Degenerate Productivity
@@ -74,26 +67,25 @@ function App() {
       </div>
       <div className="flex flex-row justify-evenly ">
         {/* TODO: dynamically change button text based on timer state */}
-        {!isRunning && (
+        {isRunning ? (
           <button
-            className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
+            className="bg-[#3f4951] hover:bg-[#2e3034] font-bold py-2 px-4 rounded"
+            onClick={stop}
+            disabled={!isRunning}
+          >
+            Stop Timer
+          </button>
+        ) : (
+          <button
+            className="bg-[#3f4951] hover:bg-[#2e3034] font-bold py-2 px-4 rounded"
             onClick={start}
             disabled={isRunning}
           >
             Start Timer
           </button>
         )}
-        {isRunning && (
-          <button
-            className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
-            onClick={stop}
-            disabled={!isRunning}
-          >
-            Stop Timer
-          </button>
-        )}
         <button
-          className="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded"
+          className="bg-[#886a44] hover:bg-[#69492e] text-gray-900 font-bold py-2 px-4 rounded"
           onClick={reset}
         >
           Reset Timer

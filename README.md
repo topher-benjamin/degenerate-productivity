@@ -3,6 +3,9 @@
 
 By: 0rangeyouglad
 
+### Description
+This is meant to be a small React app used to potentially increase productivity. It aims to combine the tools of Pomodoro timers with variable reward scheduleing. 
+
 
 ## Available Scripts
 
